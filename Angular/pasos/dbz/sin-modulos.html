@@ -1,0 +1,54 @@
+<p>Dragon Ball Z</p>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <h3>Personajes</h3>
+        <hr>
+        <ul>
+            <li *ngFor="let personaje of personajes">
+                {{ personaje.nombre }} -- {{ personaje.poder | number }}
+            </li>
+        </ul>
+
+       <!--  <ul>
+            <li>Yamcha - 700</li>
+            <li>Krillin - 800</li>
+            <li>Freezer - 10,000</li>
+        </ul> -->
+    </div>
+    <div class="col">
+        <h3>Agregar <small>{{ nuevo.nombre }}</small></h3>
+        <hr>
+
+        <form (ngSubmit)="agregar()">
+            <!-- <input
+                type="text"
+                placeholder="Nombre"
+                [value]="nuevo.nombre"
+                (input)="cambiarNombre( $event)"
+                >
+            <input
+                type="number"
+                placeholder="Poder"
+                [value]="nuevo.poder"
+            > -->
+            <input
+                type="text"
+                placeholder="Nombre"
+                name="nombre"
+                [(ngModel)]="nuevo.nombre"
+            >
+            <!-- [()] hace que el resultado del evento se ponga dentro de la propiedad definida -->
+            <input
+                type="number"
+                placeholder="Poder"
+                name="poder"
+                [(ngModel)]="nuevo.poder"
+            >
+
+
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+</div>

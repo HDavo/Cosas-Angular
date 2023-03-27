@@ -1,0 +1,17 @@
+<p>Dragon Ball Z</p>
+<hr>
+<!-- El fichero previo a poner módulos hijos está dentro de pasos -->
+<div class="row">
+    <div class="col">
+        <h3>Personajes</h3>
+        <hr>
+        <app-personajes [personajes]="personajes"></app-personajes>
+
+    </div>
+    <div class="col">
+        <app-agregar
+            [nuevo]="nuevo"
+            (onNuevoPersonaje)="agregarNuevoPersonaje( $event )"
+        ></app-agregar>
+    </div>
+</div>
