@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SearchGifsResponse, Gif } from '../interface/gifs.interface';
 
@@ -11,7 +11,7 @@ import { SearchGifsResponse, Gif } from '../interface/gifs.interface';
 export class GifsService {
 
   private apiKey: string = 'JSy9TgGsN9InForJt5TmeJKwVSEq3wx4';
-
+  private servicioUrl: string = 'https://api.giphy.com/v1/gifs';
   private _historial: string[] = [];
 
   public resultados: Gif [] = [];
@@ -36,6 +36,10 @@ export class GifsService {
     if(localStorage.getItem('historial')){
       this._historial = JSON.parse(localStorage.getItem('historial')!); //esto puede devolver un null, por lo que con ! indicamos que aseguramos que devuelve algo a ts
     } */
+
+    //para poder mostrar los resultados de la última búsqueda usando el localstorage
+    this.resultados = JSON.parse(localStorage.getItem('resultados')!) || [];
+
   }
   
 
@@ -53,19 +57,34 @@ export class GifsService {
       localStorage.setItem('historial', JSON.stringify(this._historial) );
     }
 
-    //peticion de httpClient a la api
+    const params = new HttpParams().set('api_key', this.apiKey).set('limit','10').set('q', query);
+
+    console.log(params)
+
+    //---------------Petición usando params------------------------------------------
+
+    this.http.get<SearchGifsResponse>(`${this.servicioUrl}/search`, { params })
+      .subscribe( (respuesta) => {
+        // console.log(respuesta.data);
+        this.resultados = respuesta.data;
+
+        localStorage.setItem('resultados', JSON.stringify( this.resultados));
+        //ejemplo de uso de métodos después del tipado
+        // respuesta.data[0].images.downsized_medium.url
+      });
+
+
+    /* //peticion de httpClient a la api (sin params)
     this.http.get<SearchGifsResponse>(`https://api.giphy.com/v1/gifs/search?api_key=${this.apiKey}&q=${ query } &limit=10`)
       .subscribe( (respuesta) => { //para ponerle un tipo a la respuesta dada por la api y poder aplicarle métodos
         console.log(respuesta.data);
         this.resultados = respuesta.data;
 
+        localStorage.setItem('resultados', JSON.stringify( this.resultados));
         //ejemplo de uso de métodos después del tipado
         // respuesta.data[0].images.downsized_medium.url
-      });
-    
-    // fetch('https://api.giphy.com/v1/gifs/search?api_key=JSy9TgGsN9InForJt5TmeJKwVSEq3wx4&q=kazuya')
-    
-
-    console.log(this._historial);
+      }); */
+      
+    // console.log(this._historial);
   }
 }
