@@ -26,14 +26,16 @@ export class GifsService {
 
     //por ser un servicio solo se carga una vez, por lo que es el mejor lugar donde iniciar el localstorage
 
-    
+    //la creación puede hacerse de diversas maneras pero siempre debemos asegurarnos que indicamos con !
+
+    //forma de una sola línea
     this._historial = JSON.parse(localStorage.getItem('historial')!) || [];
 
     
-
+    /* //forma con condicional y varias líneas
     if(localStorage.getItem('historial')){
       this._historial = JSON.parse(localStorage.getItem('historial')!); //esto puede devolver un null, por lo que con ! indicamos que aseguramos que devuelve algo a ts
-    }
+    } */
   }
   
 
