@@ -22,7 +22,19 @@ export class GifsService {
   }
 
   //inyección de httpClient
-  constructor (private http: HttpClient ) {}
+  constructor (private http: HttpClient ) {
+
+    //por ser un servicio solo se carga una vez, por lo que es el mejor lugar donde iniciar el localstorage
+
+    
+    this._historial = JSON.parse(localStorage.getItem('historial')!) || [];
+
+    
+
+    if(localStorage.getItem('historial')){
+      this._historial = JSON.parse(localStorage.getItem('historial')!); //esto puede devolver un null, por lo que con ! indicamos que aseguramos que devuelve algo a ts
+    }
+  }
   
 
 
@@ -34,6 +46,9 @@ export class GifsService {
       this._historial.unshift( query );
       //se corta y luego se inserta
       this._historial = this._historial.splice(0,10); //limitación del número de elementos a mostrar
+
+      //para grabar en el localstorage
+      localStorage.setItem('historial', JSON.stringify(this._historial) );
     }
 
     //peticion de httpClient a la api
