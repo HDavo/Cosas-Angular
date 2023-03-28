@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Personaje } from '../interfaces/dbz.interfaces';
+import { DbzService } from '../services/dbz.service';
 
 //----------Perteneciente a la sección 5: Módulos padres e hijos---------
 
@@ -16,8 +17,10 @@ export class AgregarComponent {
   }
 
   //eventEmitter devuelve es un genérico
-  @Output() onNuevoPersonaje: EventEmitter<Personaje> = new EventEmitter();
+  // @Output() onNuevoPersonaje: EventEmitter<Personaje> = new EventEmitter();
   //En este caso se ha definido que debe emitir un tipo Personaje
+
+  constructor(private dbzService: DbzService){}
 
   agregar() {
     if ( this.nuevo.nombre.trim().length === 0){
@@ -25,7 +28,9 @@ export class AgregarComponent {
     }
 
     console.log(this.nuevo)
-    this.onNuevoPersonaje.emit( this.nuevo );
+    // this.onNuevoPersonaje.emit( this.nuevo ); //ya no se hace al usar el servicio
+
+    this.dbzService.agregarPersonaje(this.nuevo); //linea añadida para poder usar el servicio
 
     //para añadir nuevos personajes y limpiar después de añadir
     this.nuevo = {
