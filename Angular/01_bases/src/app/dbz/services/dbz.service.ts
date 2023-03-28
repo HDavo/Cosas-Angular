@@ -28,7 +28,7 @@ export class DbzService {
     agregarPersonaje( recibido: Personaje) {
         this._personajes.push( recibido );
     }
-
+}
 
       /* propiedades
       setters y getters
@@ -45,5 +45,5 @@ export class DbzService {
     
         console.log("Agregado con éxito usando un eventEmitter desde la clase hija ")
       } */
-}
+
 
