@@ -1,0 +1,21 @@
+//módulo para agrupar los módulos usados de primeNg
+
+import { NgModule } from '@angular/core';
+
+//Primeng (de terceros)
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { MenubarModule } from 'primeng/menubar';
+
+@NgModule({
+  declarations: [],
+  exports: [
+    ButtonModule,
+    CardModule,
+    MenubarModule
+  ],
+ /*  Este tipo de módulos creados de forma expresa para solamente centralizar elementos de terceros, 
+  no necesitan de imports ya que no van a usarlo,
+  simplemente agrupan los módulos usados y los exportan para su uso en el resto de la aplicación. */
+})
+export class PrimeNgModule { }
