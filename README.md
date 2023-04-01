@@ -7,6 +7,22 @@ npm 8.19
 angular cli 15.2.4
 
 # Pasos instalación Windows
+La recomendación es instalarlo mediante un gestor de versiones de node disponible para Windows, pero en este caso se ha realizado de la siguiente manera:
+
+## Node
+En este caso basta con ir a la página de node y buscar el instalador de la versión deseada e instalar.
+En este caso la versión 16.19.1 se encuentra dentro del apartado "Previous Releases".
+
+## npm
+
+Despúes de haber instalado node, se debe usar el siguiente comando dentro del cmd o de powershell.
+
+`npm install npm@8.19`
+
+
+# Angular
+
+`npm install -g @angular/cli`
 
 # Pasos instalación Linux
 
