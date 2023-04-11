@@ -1,1 +1,38 @@
-<p>numeros works!</p>
+<div class="text-layout">
+    <h1>DecimalPipe y Porcentaje</h1>
+    <p>
+        Pipes incluidos en Angular - Usualmente en el Common Module.
+    </p>
+</div>
+
+<div class="grid">
+        <div class="col-3">
+            <p-card header="Ventas Netas (defecto)"
+                    subheader="del año actual">
+                <i class="pi pi-euro"></i>
+                {{ ventasNetas | number }}
+            </p-card>
+        </div>
+        <div class="col-3">
+            <p-card header="Ventas Netas (personalización)"
+                    subheader="del año actual">
+                <i class="pi pi-euro"></i>
+                {{ ventasNetas | number:'1.2-2' }}
+            </p-card>
+        </div>
+
+        <div class="col-3">
+            <p-card header="Ventas Brutas"
+                    subheader="del año actual">
+                {{ (ventasNetas + 343422) | currency:'EUR':'symbol-narrow':'1.0-4' }}
+            </p-card>
+        </div>
+
+        
+        <div class="col-3">
+            <p-card header="Porcentaje de ganancias"
+                    subheader="del año actual">
+                {{ porcentaje | percent:'2.2-2'}}
+            </p-card>
+        </div>
+</div>

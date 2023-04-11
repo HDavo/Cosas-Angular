@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 //Primeng (de terceros)
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { FieldsetModule } from 'primeng/fieldset';
 import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { MenubarModule } from 'primeng/menubar';
   exports: [
     ButtonModule,
     CardModule,
+    FieldsetModule,
     MenubarModule
   ],
  /*  Este tipo de módulos creados de forma expresa para solamente centralizar elementos de terceros, 
