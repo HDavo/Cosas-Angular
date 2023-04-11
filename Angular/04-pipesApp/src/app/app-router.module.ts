@@ -28,7 +28,7 @@ const routes: Routes = [
     component: OrdenarComponent,
   },
   {
-    path:'**',
+    path:'**', //path comodin para el caso en que nos existan coincidencias, redirección por defecto
     redirectTo: '',
   }
 

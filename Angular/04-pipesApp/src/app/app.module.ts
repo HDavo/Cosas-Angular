@@ -20,7 +20,6 @@ el módulo y nada de contenido directo de primeNg */
     BrowserModule,
     AppRouterModule,
     SharedModule,
-    
     // PrimeNgModule,
   ],
   providers: [],
