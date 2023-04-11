@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   ]
 })
 export class BasicosComponent {
+  nombreLower: string = 'Pepe';
+  nombreUpper: string = 'MANOLO';
+  nombreCompleto: string = 'PePE PeREz';
 
+  fecha: Date = new Date(); //siempre la fecha del momento de ejecución
 }

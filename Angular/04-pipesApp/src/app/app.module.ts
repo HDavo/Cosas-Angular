@@ -5,8 +5,9 @@ import { AppComponent } from './app.component';
 
 //para poder usar primeNg (módulo personalizado)
 // import { PrimeNgModule } from './prime-ng/prime-ng.module'; 
-import { SharedModule } from './shared/shared.module';
 import { AppRouterModule } from './app-router.module';
+import { SharedModule } from './shared/shared.module';
+import { VentasModule } from './ventas/ventas.module';
 /* Bastaría con poner el SharedModule ya que el contenido de PrimeNgModule
 se incorpora en este módulo y AppComponent.component.html solo muestra
 el módulo y nada de contenido directo de primeNg */
@@ -20,6 +21,7 @@ el módulo y nada de contenido directo de primeNg */
     BrowserModule,
     AppRouterModule,
     SharedModule,
+    VentasModule
     // PrimeNgModule,
   ],
   providers: [],
