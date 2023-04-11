@@ -7,6 +7,8 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { FieldsetModule } from 'primeng/fieldset';
 import { MenubarModule } from 'primeng/menubar';
+import { TableModule } from 'primeng/table';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
   declarations: [],
@@ -14,7 +16,9 @@ import { MenubarModule } from 'primeng/menubar';
     ButtonModule,
     CardModule,
     FieldsetModule,
-    MenubarModule
+    MenubarModule,
+    TableModule,
+    ToolbarModule
   ],
  /*  Este tipo de módulos creados de forma expresa para solamente centralizar elementos de terceros, 
   no necesitan de imports ya que no van a usarlo,

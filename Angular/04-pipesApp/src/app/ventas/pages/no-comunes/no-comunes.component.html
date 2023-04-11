@@ -25,14 +25,14 @@
     <div class="col md:col-6 sm:col-9">
         <p-fieldset legend="i18nPlural Pipe" [toggleable]="true">
             <p>Actualmente {{  clientes.length| i18nPlural: clientesMapa }}.</p>
-        </p-fieldset>
-        <button pButton pRipple
+            <button pButton pRipple
                 (click)="borrarCliente()"
                 icon="pi pi-user-minus"
                 label="Borrar un cliente"
                 class="p-button-danger">
-            
-        </button>
+            </button>
+        </p-fieldset>
+        
     </div>
     <div class="col md:col-6 sm:col-9">
         <p-fieldset legend="Slice Pipe" [toggleable]="true">
