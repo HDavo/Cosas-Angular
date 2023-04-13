@@ -1,4 +1,4 @@
-<!-- Para ver la versión sin las tablas de primeNg mirar dentro de la carpeta de pasos -->
+<!-- Para ver la versión sin las tablas de primeNg mirar dentro de la carpeta pasos -->
 <div>
     <h1>Pipes personalizados</h1>
     <p>
@@ -37,6 +37,7 @@
     </div>
 </p-toolbar>
 
+<!-- tabla con la ordenación hecha a mano -->
 <div class="grid">
     <div class="col mt-2">
         <p-table [value]="heroes | ordenar: ordenarPor" [tableStyle]="{ 'min-width': '50rem' }">
@@ -45,6 +46,30 @@
                     <th>Nombre</th>
                     <th>Vuela</th>
                     <th>Color</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-heroe>
+                <tr>
+                    <td>{{ heroe.nombre }}</td>
+                    <td>{{ heroe.vuela | volador | titlecase }}</td>
+                    <td>{{ heroe.color }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+
+<!-- con sortable table -->
+<!-- para poder usarla mirar dentro del apartado sort de las tablas de primeng. En este caso, se ha cambiado el pipe de la tabla porque se modificaba el de la tabla anterior -->
+<div class="grid">
+    <div class="col mt-2">
+        <p-table [value]="heroes | slice: 0" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="nombre" style="width:20%">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+                    <th pSortableColumn="vuela" style="width:20%">Vuela <p-sortIcon field="vuela"></p-sortIcon></th>
+                    <th pSortableColumn="color" style="width:20%">Color <p-sortIcon field="color"></p-sortIcon></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-heroe>
