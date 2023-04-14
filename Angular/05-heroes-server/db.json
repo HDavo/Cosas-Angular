@@ -168,8 +168,17 @@
       "characters": "Norrin Radd"
     },
     {
-      "superhero": "Super Pepe",
-      "publisher": "DC Comics",
+      "superhero": "Super ManAntoniolo",
+      "publisher": "Marvel Comics",
+      "alter_ego": "Pepe Martinez",
+      "first_appearance": "Rey del Puño de Hierro #3",
+      "characters": "Pepe, Manolo, Alberto",
+      "alt_img": "https://wallpapercave.com/wp/wp6663142.jpg",
+      "id": "R3bhry8"
+    },
+    {
+      "superhero": "Super Paco",
+      "publisher": "Marvel Comics",
       "alter_ego": "Pepe Martinez",
       "first_appearance": "Rey del Puño de Hierro #3",
       "characters": "Pepe, Manolo, Alberto",
