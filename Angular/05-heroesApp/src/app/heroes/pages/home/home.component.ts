@@ -22,7 +22,7 @@ import { Auth } from 'src/app/auth/interfaces/auth.interface';
   `
   ]
 })
-export class HomeComponent {
+export class HomeComponent{
 
   get auth(){
     return this.servicioAuth.autorizacion;

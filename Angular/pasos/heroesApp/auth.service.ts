@@ -1,3 +1,5 @@
+//versión en la que no se usa of para resolver el observable, solamente se controla con boolean
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
@@ -23,9 +25,9 @@ export class AuthService {
   constructor( private peticion: HttpClient) { } //para poder hacer peticiones
 
 
-  verificaAutenticacion():Observable<boolean>{ //esto nos puede devolver un observable, que debemos resolver o bien un boolean
+  verificaAutenticacion():Observable<boolean> | boolean{ //esto nos puede devolver un observable, que debemos resolver o bien un boolean
     if(!localStorage.getItem('token')){
-      return of(false);
+      return false;
     } //TODO: también podría hacer usando of para resolver los boolean
 
 
@@ -33,14 +35,7 @@ export class AuthService {
       .pipe(
         map( auth => {
           console.log('map', auth);
-          this._autorizacion = auth;
           return true;
-
-          /*Solo puede acceder aqui si se tiene un token,
-          por eso y para preservar la información del usuario de forma persistente.
-          Actualizamos la información del usuario en este punto y la igualamos a la que tenemos guardada
-          al haber podido entrar aquí.
-          */
         }) //transforma y devuelve un nuevo valor con esa estructura
       )
   }

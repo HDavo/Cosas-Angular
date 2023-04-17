@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ErrorPageComponent } from './shared/error-page/error-page.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -9,10 +10,13 @@ const routes: Routes = [
     /*cuando alguien entre en la ruta,
     mediante esta promesa cargamos las rutas contenidas dentro del fichero especificado.
     En el momento en que ese módulo se cargue nos devolverá ese módulo*/
+    
   },
   {
     path: 'heroes',
-    loadChildren: () => import('./heroes/heroes.module').then( m => m.HeroesModule)
+    loadChildren: () => import('./heroes/heroes.module').then( m => m.HeroesModule),
+    canLoad: [AuthGuard], //con esto hacemos que el acceso a las rutas de este modulo esté restringido
+    canActivate: [AuthGuard]
   },
   {
     path: '404',

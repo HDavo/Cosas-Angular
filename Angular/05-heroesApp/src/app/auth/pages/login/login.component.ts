@@ -27,9 +27,11 @@ export class LoginComponent {
            this.router.navigate(['./heroes']);
         }
       });
+  }
 
-   
-
+  ingresarSinLogin() {
+    this.autorizacion.logout();
+    this.router.navigate(['./heroes']);
   }
 
 }
