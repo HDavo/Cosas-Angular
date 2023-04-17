@@ -12,7 +12,7 @@ export class DynamicPageComponent {
     juegosFavoritos: new FormArray([])
   }); */
 
-  public miFormularioDinamico = this.construirFormulario.group({
+  public miFormularioDinamico: FormGroup = this.construirFormulario.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
     juegosFavoritos: this.construirFormulario.array([
       ['Tekken 5', Validators.required],
@@ -27,6 +27,34 @@ export class DynamicPageComponent {
 
   get juegosFavoritos(){
     return this.miFormularioDinamico.get('juegosFavoritos') as FormArray;
+  }
+
+  campoValido(campo: string): boolean | null {
+    return this.miFormularioDinamico.controls[campo] && this.miFormularioDinamico.controls[campo].touched;
+  }
+
+  campoValidoArrays( arr: FormArray, index: number){
+    return arr.controls[index].errors && arr.controls[index].touched;
+  }
+
+  getErrorCampo(campo: string): string | null {
+    if(!this.miFormularioDinamico.controls[campo]){
+      return null;
+    }
+
+    const fallos = this.miFormularioDinamico.controls[campo].errors || {};
+
+    for(const key of Object.keys(fallos)){
+      switch(key){
+        case 'required':
+          return 'Este campo es requerido';
+        case 'minlength':
+          return `Mínimo ${fallos['minlength'].requiredLength } caracteres.`;
+        
+      }
+    }
+
+    return null;
   }
 
   masFavoritos(): void{
