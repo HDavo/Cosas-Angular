@@ -65,7 +65,8 @@
                   Términos y condiciones de uso
                 </label>
               </div>
-              <span class="form-text text-danger">
+              <span *ngIf="campoValido('condiciones')"
+                    class="form-text text-danger">
                  Debe de aceptar las condiciones de uso
               </span>
 
@@ -91,7 +92,7 @@
 <br>
 
 <h5>Persona</h5>
-<pre>{{ 'object' | json }}</pre>
+<pre>{{ persona | json }}</pre>
 <br>
 
 <h5>Valid</h5>

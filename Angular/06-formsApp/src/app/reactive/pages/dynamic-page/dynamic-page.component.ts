@@ -30,7 +30,7 @@ export class DynamicPageComponent {
   }
 
   campoValido(campo: string): boolean | null {
-    return this.miFormularioDinamico.controls[campo] && this.miFormularioDinamico.controls[campo].touched;
+    return this.miFormularioDinamico.controls[campo].errors && this.miFormularioDinamico.controls[campo].touched;
   }
 
   campoValidoArrays( arr: FormArray, index: number){
