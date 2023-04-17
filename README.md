@@ -21,6 +21,7 @@ Despúes de haber instalado node, se debe usar el siguiente comando dentro del c
 
 
 # Angular
+Se debe instalar como global (-g) para que funcione sin problemas. Para poder hacerlo debe iniciarse el cmd como administrador.
 
 `npm install -g @angular/cli`
 
