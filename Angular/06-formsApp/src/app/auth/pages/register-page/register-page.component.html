@@ -117,9 +117,9 @@
 <h5>Username</h5>
 <pre>{{ miFormulario.controls['usuario'].errors | json }}</pre>
 
-
 <h5>Password</h5>
 <pre>{{ miFormulario.value.passwd | json }}</pre>
 
 <h5>Confirmar</h5>
-<pre>{{ miFormulario.value.passwd2 | json }}</pre>
+<pre>{{ miFormulario.controls['passwd2'].errors | json }}</pre>
+<!-- TODO: no se muestra de forma correcta el error, pero si se hace la validación-->

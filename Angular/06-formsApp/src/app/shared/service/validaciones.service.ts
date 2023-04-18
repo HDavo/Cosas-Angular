@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 @Injectable({providedIn: 'root'})
 export class ServicioValidacion {
@@ -25,5 +25,43 @@ export class ServicioValidacion {
     public campoValido( formulario: FormGroup, campo: string): boolean | null {
         return formulario.controls[campo].errors && formulario.controls[campo].touched;
     }
-    
+
+    /* public camposIguales(field1: string, field2: string){
+
+        return (formGroup: AbstractControl ): ValidationErrors | null => {
+            const fieldValue1 = formGroup.get(field1)?.value;
+            const fieldValue2 = formGroup.get(field2)?.value;
+      
+            if ( fieldValue1 !== fieldValue2 ) {
+                formGroup.get(field2)?.setErrors({ notEqual: true });
+                return { notEqual: true }
+                
+            }
+      
+            formGroup.get(field2)?.setErrors(null);
+            return null;
+        }
+    } */
+
+
+    public camposIguales(campo1: string, campo2: string){
+
+        return ( formGroup: AbstractControl): ValidationErrors | null => {
+            const valorCampo1 = formGroup.get(campo1)?.value;
+            const valorCampo2 = formGroup.get(campo2)?.value;
+
+            if( valorCampo1 !== valorCampo2 ){
+                formGroup.get(campo2)?.setErrors({ noIguales: true });
+                console.log('Entro ewe');
+                return { noIguales: true}
+                
+            }
+            
+            console.log('Entro aqui2');
+            formGroup.get(campo2)?.setErrors(null);
+            return null;
+
+            
+        }
+    }  
 }
