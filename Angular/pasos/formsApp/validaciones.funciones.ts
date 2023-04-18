@@ -1,5 +1,5 @@
-//el fichero sin las modificaciones para ser un servicio está dentro de la carpeta pasos
 import { FormControl, ValidationErrors } from "@angular/forms";
+
 
 
 export const firstNameAndLastnamePattern: string = '([a-zA-Z]+) ([a-zA-Z]+)';

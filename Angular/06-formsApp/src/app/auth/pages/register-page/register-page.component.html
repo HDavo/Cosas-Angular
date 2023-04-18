@@ -17,7 +17,8 @@
                            formControlName="nombre"
                            placeholder="Nombre del usuario">
 
-                    <span class="form-text text-danger">
+                    <span *ngIf="campoValido('nombre')" 
+                        class="form-text text-danger">
                         Debe de ser en formato de nombre y apellido
                     </span>
                 </div>
@@ -31,7 +32,8 @@
                            class="form-control"
                            formControlName="correo"
                            placeholder="Email del usuario">
-                    <span class="form-text text-danger">
+                    <span *ngIf="campoValido('correo')"
+                    class="form-text text-danger">
                         mensaje de error del email
                     </span>
                 </div>
@@ -45,7 +47,8 @@
                            class="form-control"
                            formControlName="usuario"
                            placeholder="Nombre código del usuario">
-                    <span class="form-text text-danger">
+                    <span *ngIf="campoValido('usuario')"
+                    class="form-text text-danger">
                          El username no puede ser Pepe
                     </span>
                 </div>
@@ -60,7 +63,8 @@
                            formControlName="passwd"
                            placeholder="Password de su cuenta">
 
-                    <span class="form-text text-danger">
+                    <span *ngIf="campoValido('passwd')"
+                    class="form-text text-danger">
                          La contraseña debe de ser mayor de 6 caracteres.
                     </span>
                 </div>
@@ -75,7 +79,8 @@
                            formControlName="passwd2"
                            placeholder="Confirmar la contraseña">
 
-                    <span class="form-text text-danger">
+                    <span *ngIf="campoValido('passwd2')"
+                    class="form-text text-danger">
                          Las contraseñas deben de ser iguales
                     </span>
                 </div>
