@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { switchMap, tap } from 'rxjs';
 import { PaisesService } from '../../services/paises.service';
 import { PaisSm } from '../../interfaces/paises.interface';
 
@@ -32,6 +33,21 @@ export class SelectorPageComponent implements OnInit{
     //cuando cambie la región.
     //Cogemos el valor de la option desde el HTML, usando la propidad region de nuestro objeto de formulario
     this.miFormulario.get('region')?.valueChanges
+      .pipe(
+        tap( ( _ ) => { // ( _ ) forma de indicar, por convenio, que no nos interesa lo que recibe
+          this.miFormulario.get('pais')?.reset(''); 
+          //esto es lo que hace que al cambiar de region, se limpie el apartado de pais de nuestro objeto de formulario
+        }),
+        switchMap(region => this.servicioPaises.getPaisesPorRegion(region))
+      )
+      .subscribe( paises => {
+        this.paises = paises;
+        console.log(paises);
+      })
+
+
+    //version sin switchmap
+   /*  this.miFormulario.get('region')?.valueChanges
       .subscribe( region => {
         console.log(region);
 
@@ -40,7 +56,7 @@ export class SelectorPageComponent implements OnInit{
             this.paises = paises;
             console.log(paises);
           })
-      })
+      }) */
   }
 
   guardar(){
