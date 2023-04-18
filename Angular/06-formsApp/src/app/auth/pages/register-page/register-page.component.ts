@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as validacionesPersonalizadas from 'src/app/shared/validaciones/validaciones.funciones';
 
 @Component({
   templateUrl: './register-page.component.html',
@@ -9,10 +10,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterPageComponent {
 
   public miFormulario: FormGroup = this.construirFormulario.group({
-    nombre: ['', Validators.required],
-    correo: ['', Validators.required],
-    usuario: ['', Validators.required],
-    passwd: ['', Validators.required, Validators.minLength(6)],
+    nombre: ['', [Validators.required, Validators.pattern(validacionesPersonalizadas.firstNameAndLastnamePattern)]],
+    correo: ['', [Validators.required, Validators.pattern(validacionesPersonalizadas.emailPattern) ]],
+    usuario: ['', [Validators.required, validacionesPersonalizadas.noAceptado ]], //solo se pasa la referencia, no la función
+    passwd: ['', [Validators.required, Validators.minLength(6)]],
     passwd2: ['', Validators.required],
   })
 

@@ -46,7 +46,7 @@
                            formControlName="usuario"
                            placeholder="Nombre código del usuario">
                     <span class="form-text text-danger">
-                         El username no puede ser Strider
+                         El username no puede ser Pepe
                     </span>
                 </div>
             </div>
@@ -104,13 +104,13 @@
 <pre>{{ miFormulario.errors| json }}</pre>
 
 <h5>Nombre</h5>
-<pre>{{ miFormulario.value.nombre| json }}</pre>
+<pre>{{ miFormulario.controls['nombre'].errors | json }}</pre>
 
 <h5>Email</h5>
-<pre>{{ miFormulario.value.correo | json }}</pre>
+<pre>{{ miFormulario.controls['correo'].errors| json }}</pre>
 
 <h5>Username</h5>
-<pre>{{ miFormulario.value.usuario| json }}</pre>
+<pre>{{ miFormulario.controls['usuario'].errors | json }}</pre>
 
 
 <h5>Password</h5>
