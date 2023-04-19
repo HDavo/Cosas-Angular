@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PaisSm } from '../interfaces/paises.interface';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, of } from 'rxjs';
+
+import { PaisCodigo, PaisSm } from '../interfaces/paises.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,36 @@ export class PaisesService {
     const url: string = `${this.baseUrl}/region/${region}?fields=cca3&fields=name`;
     return this.peticion.get<PaisSm[]>(url);
 
+  }
+
+  getPaisPorCodigo(codigo: string): Observable <PaisCodigo []| []> { //se pueden usar los diferentes códigos cca
+
+    if(!codigo){ //para el caso de que no exista el código
+      return of([])
+    }
+    const url = `${this.baseUrl}/alpha/${codigo}`;
+    return this.peticion.get<PaisCodigo[]>(url);
+  }
+
+
+  getPaisPorCodigoSm(codigo: string): Observable <PaisSm> { //se pueden usar los diferentes códigos cca    
+    const url = `${this.baseUrl}/alpha/${codigo}?fields=cca3&fields=name`;
+    return this.peticion.get<PaisSm>(url);
+  }
+
+  getPaisesPorCodigos(fronteras: string[]): Observable<PaisSm[]>{
+    if(!fronteras){
+      return of([]);
+    }
+
+    const solicitudes: Observable<PaisSm>[] = [];
+
+    fronteras.forEach( codigo => {
+      const solicitud = this.getPaisPorCodigoSm(codigo);
+
+      solicitudes.push( solicitud );
+    });
+
+    return combineLatest( solicitudes );
   }
 }
