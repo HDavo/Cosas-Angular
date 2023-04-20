@@ -1,0 +1,39 @@
+<h1>Redes sociales: Usuarios</h1>
+<hr>
+
+<div *ngIf="doughnutChartData.datasets[0].data.length === 0; else divGrafica"
+     class="alert alert-info">
+    Cargando datos...
+</div>
+
+<div class="row">
+    <div class="col">
+        <ng-template #divGrafica>
+            <canvas baseChart class="chart"
+                    [data]="doughnutChartData"
+                    [type]="doughnutChartType"
+            >
+            </canvas>
+            <span class="float-end text-primary">
+                Información en milllones de Usuarios
+            </span>
+        </ng-template>
+    </div>
+</div>
+
+<!-- <div *ngIf="doughnutChartData.datasets[0].data.length === 0; else divGrafica"
+  class="alert alert-info">
+  Cargando información...
+</div>
+ 
+ 
+<div class="row">
+  <div class="col">
+    <ng-template #divGrafica>
+      <div style="display: block">
+        <canvas baseChart [data]="doughnutChartData" [type]="doughnutChartType">
+        </canvas>
+      </div>
+    </ng-template>
+ 
+  </div> -->

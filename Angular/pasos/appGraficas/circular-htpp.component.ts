@@ -1,5 +1,3 @@
-//TODO: versión sin los datos con rxjs en pasos
-
 import { Component, OnInit } from '@angular/core';
 import { GraficasService } from '../../services/graficas.service';
 import { ChartData, ChartType } from 'chart.js';
@@ -42,8 +40,7 @@ export class CircularHtppComponent implements OnInit{
         console.log(datos);
       }); */
 
-      //para sacar los datos sin rxjs
-      /* this.servicioGraficas.getUsuarios()
+      this.servicioGraficas.getUsuarios()
         .subscribe( resp => {
           console.log(resp);
 
@@ -54,14 +51,7 @@ export class CircularHtppComponent implements OnInit{
             labels: Object.keys(resp),
             datasets: [{data: Object.values(resp)}]
           }
-        }); */
-
-        this.servicioGraficas
-      .getUsuariosCircular()
-      .subscribe(({ labels, datasets }) => {
-        // console.log(data);
-        this.doughnutChartData = { labels, datasets };
-      });
+        })
   }
 
   public doughnutChartType: ChartType = 'doughnut';
