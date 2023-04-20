@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class GraficasService {
 
-  constructor() { }
+  public BaseUrl: string = 'http://localhost:3000/grafica';
+  constructor( private peticion: HttpClient) { }
+
+  getUsuarios(){
+    return this.peticion.get(this.BaseUrl);
+  }
 }
