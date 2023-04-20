@@ -3,9 +3,15 @@
 
 <div class="row">
     <div class="col-md-6">
-        Gráfica 1
+        <app-grafica-barra [horizontal]="true"
+                           [inputDatasets]="productoData.datasets"
+                           [inputLabels]="proveedoresData.labels">
+                        </app-grafica-barra>
     </div>
+
     <div class="col-md-6">
-        Gráfica 2
+        <app-grafica-barra [inputDatasets]="proveedoresData.datasets"
+                           [inputLabels]="proveedoresData.labels"
+        ></app-grafica-barra>
     </div>
 </div>
