@@ -1,31 +1,29 @@
 const express = require('express'); //importación de express
+const cors = require('cors');
+require ('dotenv').config();
 
+// console.log(process.env);
 
 //Creación del servidor/aplicación de express
 
 const app = express(); 
 
+//Directorio público
+app.use(express.static('public'))
 
-// console.log('Hola, probando nodemon');
-// console.log('Hola, probando run ');
+// CORS
+app.use(cors());
 
-app.get('/', (peticion, respuesta) => { //esto admite dos parámetros, que son la peticion y la respuesta que hacemos a ella
-    // console.log('Petición en /');
-
-    //podemos indicar el error que queremos devolver en respuesta a la petición
-   /*  respuesta.status(404).json({
-        ok: true,
-        mensaje: 'Pepe',
-        uid: 1234
-    }) */
-     respuesta.json({
-        ok: true,
-        mensaje: 'Pepe',
-        uid: 1234
-    })
-});
+//Lectura y parseo del body de las peticiones
+app.use( express.json());
 
 
-app.listen(4000, () => {
-    console.log(`Servidor puesto en el puerto ${ 4000 }`)
+//Configuración de rutas (middleware de express)
+
+app.use('/api/auth', require('./routes/auth')); //definición de la estructura de rutas que vamos a usar 
+
+
+
+app.listen(process.env.PORT, () => {
+    console.log(`Servidor puesto en el puerto ${ process.env.PORT}`)
 }); //definición del puerto en donde queremos poner el servidor
