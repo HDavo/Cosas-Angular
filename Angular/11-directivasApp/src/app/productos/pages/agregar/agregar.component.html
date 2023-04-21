@@ -11,22 +11,24 @@
                    class="form-control">
         </div>
         <div class="col-auto">
-            <span class="form-text"
+            <!-- Antes de poner una directiva condicional personalizada -->
+            <!-- <span class="form-text"
                   mensaje-error
                   [mensaje]="texto1"
                   [color]="color"
                   *ngIf="hayError('nombre')">
             
                     Este campo es obligatorio
-            </span>
-        
-           <!--  <span class="form-text"
-                  mensaje-error
-                  color="blue"
-                  mensaje="Hay que rellenar este campo"
-                  *ngIf="hayError('nombre')">
-                  Este campo es obligatorio
             </span> -->
+
+            <span class="form-text"
+                  mensaje-error
+                  [mensaje]="texto1"
+                  [color]="color"
+                  [valido]="!hayError('nombre')">
+            
+                    Este campo es obligatorio
+            </span>
         </div>
     </div>
     <div class="row mt-5">

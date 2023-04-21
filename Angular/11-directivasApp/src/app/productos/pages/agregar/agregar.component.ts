@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class AgregarComponent {
 
   texto1: string = 'Pepe Perez';
-  color: string = '';
+  color: string = 'purple';
 
   miFormulario: FormGroup = this.construirFormulario.group({
     nombre: ['', Validators.required]
@@ -23,7 +23,8 @@ export class AgregarComponent {
   }
 
   cambiarNombre(){
-    this.texto1 = 'Manolo Martinez';
+    // this.texto1 = 'Manolo Martinez';
+    this.texto1 = Math.random().toString();
   }
 
   cambiarColor(){
