@@ -11,14 +11,33 @@
                    class="form-control">
         </div>
         <div class="col-auto">
-            <span *ngIf="hayError('nombre')"
-                  class="form-text">Este campo es obligatorio</span>
+            <span class="form-text"
+                  mensaje-error
+                  [mensaje]="texto1"
+                  [color]="color"
+                  *ngIf="hayError('nombre')">
+            
+                    Este campo es obligatorio
+            </span>
+        
+           <!--  <span class="form-text"
+                  mensaje-error
+                  color="blue"
+                  mensaje="Hay que rellenar este campo"
+                  *ngIf="hayError('nombre')">
+                  Este campo es obligatorio
+            </span> -->
         </div>
     </div>
     <div class="row mt-5">
         <div class="col">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary"
+                    (click)="cambiarNombre()">
                 Guardar
+            </button>
+            <button class="btn btn-primary"
+                    (click)="cambiarColor()">
+                Cambiar Color
             </button>
         </div>
     </div>
