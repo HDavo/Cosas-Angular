@@ -21,7 +21,4 @@ export class IfPersonalizadoDirective {
   ) { 
     // console.log('if-propio');
   }
-
-
-
 }

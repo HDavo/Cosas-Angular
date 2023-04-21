@@ -1,9 +1,10 @@
 # Versiones usadas
 
-
 npm 8.19
 
 angular cli 15.2.4
+
+node 16.19.1
 
 # Pasos instalación Windows
 
