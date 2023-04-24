@@ -3,6 +3,7 @@
 const { response } = require('express'); //ponemos esto para poder tener un tipado 
 const Usuario = require('../models/Usuario');
 const bcrypt = require('bcryptjs');
+const { generarJWT } = require('../helpers/jwt');
 
 
 const crearUsuario = async (peticion, respuesta = response) =>{ //aqui se pone el tipado para esos dos parámetros
@@ -30,6 +31,7 @@ const crearUsuario = async (peticion, respuesta = response) =>{ //aqui se pone e
 
 
         //Generar el jwt
+        const token = await generarJWT(dbUser.id, dbUser.name);
 
 
         //Crear usuario de bbdd
@@ -40,6 +42,7 @@ const crearUsuario = async (peticion, respuesta = response) =>{ //aqui se pone e
             ok: true,
             uid: dbUser.id,
             name,
+            token
         });
         
     } catch (error) {
@@ -52,25 +55,71 @@ const crearUsuario = async (peticion, respuesta = response) =>{ //aqui se pone e
 };
 
 
-const loginUsuario = ((peticion, respuesta = response) =>{
+const loginUsuario = async(peticion, respuesta = response) =>{
 
     const { email, password } = peticion.body;
 
     // console.log(email, password);
 
+    try{
+
+        const dbUser = await Usuario.findOne({ email });
+
+        if( !dbUser ) {
+            return respuesta.status(400).json({
+                ok: false,
+                mensaje: 'El correo no existe'
+            });
+        }
+
+        //Confirmar que la contraseña coincide
+        const validPassword = bcrypt.compareSync( password, dbUser.password);
+
+        if( !validPassword ) {
+            return respuesta.status(400).json({
+                ok: false,
+                mensaje: 'Contraseña incorrecta'
+            });
+        }
+
+        //generar el JWT
+        const token = await generarJWT(dbUser.id, dbUser.name);
+
+        //Respuesta del servicio
+        return respuesta.json({
+            ok: true,
+            uid: dbUser.id,
+            name: dbUser.name,
+            token
+        });
+
+
+    }catch(error){
+        console.log(error);
+        return respuesta.status(500).json({
+            ok: false,
+            mensaje: 'Contacte con el admin',
+        })
+    }
+
+    
+};
+
+const renovacionToken = async(peticion, respuesta = response) => {
+
+    const {uid, name } = peticion;
+
+      //generar el JWT
+      const token = await generarJWT(uid, name);
+
+
     return respuesta.json({
         ok: true,
-        mensaje: 'Login de usuario /',
-    })
-});
-
-const renovacionToken = ((peticion, respuesta = response) =>{
-
-    return respuesta.json({
-        ok: true,
-        mensaje: 'Renew',
-    })
-});
+        uid,
+        name,
+        token
+    });
+};
 
 
 
