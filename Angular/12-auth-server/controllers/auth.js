@@ -29,9 +29,8 @@ const crearUsuario = async (peticion, respuesta = response) =>{ //aqui se pone e
         const salt = bcrypt.genSaltSync();
         dbUser.password = bcrypt.hashSync( password, salt);
 
-
         //Generar el jwt
-        const token = await generarJWT(dbUser.id, dbUser.name);
+        const token = await generarJWT(dbUser.id, name);
 
 
         //Crear usuario de bbdd
@@ -42,6 +41,7 @@ const crearUsuario = async (peticion, respuesta = response) =>{ //aqui se pone e
             ok: true,
             uid: dbUser.id,
             name,
+            email,
             token
         });
         

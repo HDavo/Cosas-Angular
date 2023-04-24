@@ -26,15 +26,8 @@ const validarJWT = (peticion, respuesta = response, continuacion) => {
         });
     }
 
-
     continuacion();
 }
-
-
-
-
-
-
 
 
 
