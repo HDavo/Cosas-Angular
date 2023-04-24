@@ -1,5 +1,6 @@
 const express = require('express'); //importación de express
 const cors = require('cors');
+const { conexionDb } = require('./db/config');
 require ('dotenv').config();
 
 // console.log(process.env);
@@ -7,6 +8,10 @@ require ('dotenv').config();
 //Creación del servidor/aplicación de express
 
 const app = express(); 
+
+
+//conexion a la bbdd
+conexionDb();
 
 //Directorio público
 app.use(express.static('public'))
