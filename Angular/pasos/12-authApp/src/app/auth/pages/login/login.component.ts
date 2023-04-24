@@ -48,3 +48,6 @@ export class LoginComponent {
   }
 
 }
+//TODO: hay que comparar los códigos de las versiones.
+//TODO: no salen los mensajes personalizados de error
+//TODO: Después de haber corregido los errores de esta versión, realizar la parte del despliegue con esta versión

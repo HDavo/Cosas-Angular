@@ -6,9 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
-  declarations: [
-    DashboardComponent
-  ],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     ProtectedRoutingModule

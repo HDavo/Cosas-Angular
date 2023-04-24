@@ -9,11 +9,7 @@ import { MainComponent } from './pages/main/main.component';
 
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    MainComponent
-  ],
+  declarations: [LoginComponent, RegisterComponent, MainComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

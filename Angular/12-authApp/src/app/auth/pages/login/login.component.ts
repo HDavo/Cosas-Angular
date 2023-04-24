@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
@@ -14,37 +14,29 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
 
-  miFormulario: FormGroup = this.construirFormulario.group({
-    email: ['pepe1@test.com', [Validators.required, Validators.email]],
-    password: ['123456', [Validators.required, Validators.minLength(6)]]
+  miFormulario: FormGroup = this.fb.group({
+    email:    ['test1@test.com', [ Validators.required, Validators.email ]],
+    password: ['123456', [ Validators.required, Validators.minLength(6) ]],
   });
 
-  constructor(private construirFormulario: FormBuilder,
-              private router: Router,
-              private servicioAuth: AuthService){}
+  constructor( private fb: FormBuilder,
+               private router: Router, 
+               private authService: AuthService) { }
 
 
-  login(){
-    /* this.servicioAuth.validarToken()
-      .subscribe( resp => {
-        console.log(resp);
-      }) */
-    // console.log(this.miFormulario.valid);
-    // console.log(this.miFormulario.value);
+  login() {
+  
+    const { email, password } = this.miFormulario.value;
 
-    const {email, password } = this.miFormulario.value;
+    this.authService.login( email, password )
+      .subscribe( ok => {
 
-    this.servicioAuth.login(email, password)
-      .subscribe(valido => {
-        // console.log(valido);
-
-        if(valido===true){
+        if ( ok === true ) {
           this.router.navigateByUrl('/dashboard');
-        }else{
-          Swal.fire('Error', valido, 'error')
+        } else {
+          Swal.fire('Error', ok, 'error');
         }
       });
-    // this.router.navigateByUrl('/dashboard');
   }
 
 }

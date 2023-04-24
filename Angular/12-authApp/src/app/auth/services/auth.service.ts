@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { environment } from 'src/environments/environment.development';
-import { Observable, catchError, of, tap, map } from 'rxjs';
+import { of, Observable } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment';
+
 
 import { AuthResponse, Usuario } from '../interfaces/interfaces';
 
@@ -14,72 +17,79 @@ export class AuthService {
   private baseUrl: string = environment.baseUrl;
   private _usuario!: Usuario;
 
-  get usuario(){
-    return {...this._usuario};
-  }
-  
-  constructor(private peticionHttp: HttpClient) { }
-
-  registro(name: string, email: string, password: string){
-
-    const url = `${this.baseUrl}/new`;
-    const body = {name, email, password}; //el orden en el body no importa si está puesto como en el backend de forma correcta
-
-    return this.peticionHttp.post<AuthResponse>(url, body)
-      .pipe( //con esto nos aseguramos que antes de llegar a la pantalla del login tenemos la información ya establecida
-        tap( ({ok, token}) => {
-          // console.log(resp);
-          if(ok){
-            localStorage.setItem('token', token!);
-          }
-        }),
-        map(resp => resp.ok),
-        catchError( err => of(err.error.mensaje))
-      );
-  }
-
-  login(email: string, password: string){
-
-    const url = `${this.baseUrl}/auth`;
-    const body = {email, password};
-
-    return this.peticionHttp.post<AuthResponse>(url, body)
-      .pipe( //con esto nos aseguramos que antes de llegar a la pantalla del login tenemos la información ya establecida
-        tap( resp => {
-          // console.log(resp);
-          if(resp.ok){
-            localStorage.setItem('token', resp.token!);
-          }
-        }),
-        map(resp => resp.ok),
-        catchError( err => of(err.error.mensaje))
-      );
+  get usuario() {
+    return { ...this._usuario };
   }
 
 
-  validarToken(): Observable<boolean>{
-    const url = `${this.baseUrl}/auth/renew`;
-    const headers = new HttpHeaders()
-      .set('x-token', localStorage.getItem('token')! || '');
+  constructor( private http: HttpClient ) { }
 
-    return this.peticionHttp.get<AuthResponse>(url, { headers })
+  registro( name: string, email: string, password: string ) {
+
+    const url  = `${ this.baseUrl }/auth/new`;
+    const body = { email, password, name };
+
+    return this.http.post<AuthResponse>( url, body )
       .pipe(
-        map( resp => {
-          console.log(resp.token);
-          localStorage.setItem('token', resp.token!);
-          this._usuario = {
-            name: resp.name!,
-            uid: resp.uid!,
-            email: resp.email!
+        tap( ({ ok, token }) => {
+          if ( ok ) {
+            localStorage.setItem('token', token! );
           }
-
-          return resp.ok;
         }),
-        catchError(err => of(false))
+        map( resp => resp.ok ),
+        catchError( err => of(err.error.msg) )
+      );
+
+  }
+
+
+
+  login( email: string, password: string ) {
+
+    const url  = `${ this.baseUrl }/auth`;
+    const body = { email, password };
+
+    return this.http.post<AuthResponse>( url, body )
+      .pipe(
+        tap( resp => {
+          if ( resp.ok ) {
+            localStorage.setItem('token', resp.token! );
+          }
+        }),
+        map( resp => resp.ok ),
+        catchError( err => of(err.error.msg) )
       );
   }
 
-  logout(){
-    localStorage.clear(); //esto borra todo del localstorage de nuestra aplicación del usuario
+
+
+
+  validarToken(): Observable<boolean> {
+
+    const url = `${ this.baseUrl }/auth/renew`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token') || '' );
+
+    return this.http.get<AuthResponse>( url, { headers } )
+        .pipe(
+          map( resp => {
+            localStorage.setItem('token', resp.token! );
+            this._usuario = {
+              name: resp.name!,
+              uid: resp.uid!,
+              email: resp.email!
+            }
+
+            return resp.ok;
+          }),
+          catchError( err => of(false) )
+        );
+
   }
+
+  logout() {
+    localStorage.clear();
+  }
+
+
 }
