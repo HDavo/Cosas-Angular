@@ -98,3 +98,19 @@ ng v
 ## Versión de npm
 
 `npm -version`
+
+---
+
+# Uso (en linux con nvm)
+
+Para poder usar un proyecto de Agular descargado (normalmente sin node-modules), es necesario seguir los siguientes pasos (todo ello dentro del directorio y al mismo nivel que el fichero package.json):
+
+`npm install`
+
+`ng serve -o`
+
+En el caso de que salga algún error relativo a la versión de node al intentar lanzar la aplicación:
+
+`nvm use version`
+
+Si se necesita una versión no instalada, instalar la versión requerida antes de usar el comando use.
